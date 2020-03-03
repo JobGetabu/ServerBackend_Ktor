@@ -20,14 +20,26 @@ import io.ktor.locations.Locations
 import io.ktor.response.*
 import io.ktor.routing.get
 import io.ktor.routing.routing
+import io.ktor.server.engine.embeddedServer
+import io.ktor.server.netty.Netty
 import io.ktor.sessions.*
 import java.text.DateFormat
 
-fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
+
+fun main(args: Array<String>): Unit {
+    //val port: Int = System.getenv("PORT").toInt() ?: 8080
+
+    embeddedServer(Netty,
+        port = 8080,
+        module = Application::module
+    ).start(wait = true)
+
+    //io.ktor.server.netty.EngineMain.main(args)
+}
 
 @Suppress("unused") // Referenced in application.conf
 @kotlin.jvm.JvmOverloads
-fun Application.module(testing: Boolean = false) {
+fun Application.module() {
 
     install(Locations) {
     }
@@ -87,6 +99,8 @@ fun Application.module(testing: Boolean = false) {
 
 
         //testing
+        //val port: Int = System.getenv("PORT").toInt() ?: 8080
+        //application.log.debug("PORT key : $port")
         application.log.debug("Secret key : $hashKey")
 
     }

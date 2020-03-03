@@ -1,0 +1,6 @@
+{
+    "name": "ServerBackend_Ktor",
+    "description": "A todos Kotlin app, which can easily be deployed to Heroku.",
+    "image": "todos/java",
+    "addons": [ "heroku-postgresql" ]
+  }
